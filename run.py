@@ -23,7 +23,7 @@ def index():
 @app.route("/<username>")
 def user(username):
     """Display chat message"""
-    return "Welcome, {0} - {1}".format(username, get_all_messages())
+    return "<h1>Welcome, {0}</h1>{1}".format(username, get_all_messages())
     
     
 @app.route('/<username>/<message>')
