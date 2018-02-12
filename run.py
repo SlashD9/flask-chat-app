@@ -1,6 +1,6 @@
 import os 
 from datetime import datetime
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, request
 
 app = Flask(__name__)
 messages = []
@@ -17,9 +17,13 @@ def get_all_messages():
     return messages
 
 
-@app.route("/")
+@app.route("/", methods={"GET", "POST"})
 def index():
     """Main page for with instructions"""
+    if request.method == "POST":
+        with open("data/users.txt", "a") as user_list:
+            user_list.write(request.form["username"])
+        return redirect(request.form["username"])
     return render_template("index.html")
     
     
